@@ -1,5 +1,5 @@
 # MULTISTAGE Build
-FROM gradle:7.2.0-jdk17 AS builder
+FROM gradle:7.2.0-jdk8 AS builder
 WORKDIR /opt/java/
 COPY . /opt/java/
 RUN gradle clean build
@@ -14,6 +14,6 @@ COPY config/server.xml /opt/ibm/wlp/usr/servers/defaultServer/
 
 RUN /opt/ibm/wlp/bin/installUtility install  --acceptLicense /opt/ibm/wlp/usr/servers/defaultServer/server.xml
 
-EXPOSE 8082
+EXPOSE 9080
 
-CMD ["/opt/ibm/wlp/bin/server", "run", "defaultServer","8082"]
+CMD ["/opt/ibm/wlp/bin/server", "run", "defaultServer"]
