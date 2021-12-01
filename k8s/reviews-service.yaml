@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookinfo-dev-reviews
+  namespace: student15-bookinfo-dev
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8082
+  selector:
+    app: bookinfo-dev-reviews

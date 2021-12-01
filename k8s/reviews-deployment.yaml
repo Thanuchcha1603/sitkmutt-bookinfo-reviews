@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookinfo-dev-reviews
+  namespace: student15-bookinfo-dev
+  labels:
+    app: bookinfo-dev-reviews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookinfo-dev-reviews
+  template:
+    metadata:
+      labels:
+        app: bookinfo-dev-reviews
+    spec:
+      containers:
+      - name: bookinfo-dev-reviews
+        image: ghcr.io/thanuchcha1603/bookinfo-reviews:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082
+          name: web-port
+          protocol: TCP
+        env:
+        - name: RATINGS_SERVICE
+          value: http://ratings:8080/
+        - name: STAR_COLOR
+          value: black
+        - name: ENABLE_RATINGS
+      imagePullSecrets:
+      - name: registry-bookinfo
+
+  
